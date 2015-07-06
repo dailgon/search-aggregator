@@ -23,7 +23,10 @@ var querystring = require("querystring");
 router.get('/', function(req, res, next) {
 
   res.render('index', { title: 'Search Aggregator',
-    data: [] });
+    data: {
+      google: [],
+      bing: []
+    } });
 });
 
 // get everything after colon

@@ -3,7 +3,6 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="../javascripts/search.js" type="text/javascript"></script>
   </head>
   <body>
     <h1><%= title %></h1>
@@ -15,28 +14,50 @@
       <input type="submit" value="save"/>
     </form>
 
-
-    <ul id="objs">
+    <h2 class="titles"></h2>
+    <ul id="bing">
     </ul>
+
+
+    <h2 class="titles"></h2>
+    <ul id="google">
+    </ul>
+
 
     <script type="text/javascript">
 
+      var titles = document.getElementsByClassName('titles');
+      var bing = <%- JSON.stringify(data.bing) %> ;
+      var google = <%- JSON.stringify(data.google) %> ;
 
 
-
-      var data = <%- JSON.stringify(data) %> ;
-
-      var obj = document.getElementById('objs');
-
-      for (var i=0; i< data.length; i++){
-        var li = document.createElement("li");
-        var link = data[i][1];//JSON.stringify(data[i][1]);
-        var a = document.createElement('a');
-        a.textContent = data[i][0];
-        a.setAttribute('href', link);
-        li.appendChild(a);
-        obj.appendChild(li);
+      if (bing.length > 0 ){
+        titles[0].innerHTML = "Bing Data";
       }
+
+      if (google.length > 0 ){
+        titles[1].innerHTML = "Google Data";
+      }
+
+      var bing_obj = document.getElementById('bing');
+      var google_obj = document.getElementById('google');
+      makeList(bing, bing_obj);
+      makeList(google, google_obj)
+
+
+      function makeList(data, obj){
+
+        for (var i=0; i< data.length; i++){
+          var li = document.createElement("li");
+          var link = data[i][1];//JSON.stringify(data[i][1]);
+          var a = document.createElement('a');
+          a.textContent = data[i][0];
+          a.setAttribute('href', link);
+          li.appendChild(a);
+          obj.appendChild(li);
+        }
+
+    }
 
 
 
