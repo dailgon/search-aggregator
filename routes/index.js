@@ -35,12 +35,13 @@ router.get('/search', function(req, res, next) {
   // console.log("QR STRING: ", query_string);
 
   var result = querystring.stringify({q: query_string});
-  // var query = "https://www.google.com/search?"+result;
+  var query = "https://www.google.com/search?"+result;
   // var query = "https://duckduckgo.com/?"+result;
 
-  var query = "http://www.bing.com/search?"+result;
-  console.log("MY URL: ", query);
-  model.getSearchResults(query, function(err, data){
+  // var query = "http://www.bing.com/search?"+result;
+  // console.log("MY URL: ", query);
+  model.getSearchResults(result, function(err, data){
+  // model.getGoogleResults(query, function(err, data){
     //do nothing for now...
     // data.push()
     if (err) return next(err);
