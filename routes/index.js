@@ -25,7 +25,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Search Aggregator',
     data: {
       google: [],
-      bing: []
+      bing: [],
+      ddg: []
     } });
 });
 

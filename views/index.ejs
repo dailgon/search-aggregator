@@ -24,11 +24,17 @@
     </ul>
 
 
+    <h2 class="titles"></h2>
+    <ul id="phantom">
+    </ul>
+
+
     <script type="text/javascript">
 
       var titles = document.getElementsByClassName('titles');
       var bing = <%- JSON.stringify(data.bing) %> ;
       var google = <%- JSON.stringify(data.google) %> ;
+      var phantom = <%- JSON.stringify(data.phantom) %> ;
 
 
       if (bing.length > 0 ){
@@ -39,10 +45,17 @@
         titles[1].innerHTML = "Google Data";
       }
 
+
+      if (phantom.length > 0 ){
+        titles[2].innerHTML = "Phantom Data";
+      }
+
       var bing_obj = document.getElementById('bing');
       var google_obj = document.getElementById('google');
+      var phantom_obj = document.getElementById('phantom');
       makeList(bing, bing_obj);
-      makeList(google, google_obj)
+      makeList(google, google_obj);
+      makeList(phantom, phantom_obj);
 
 
       function makeList(data, obj){

@@ -10,13 +10,17 @@ exports.getSearchResults = function(search_query, cb){
 
   var data  = {
     google: [],
-    bing: []
+    bing: [],
+    phantom: []
   }
 
   var bing_string = "http://www.bing.com/search?"+search_query;
   var goog_string = "https://www.google.com/search?"+search_query;
+  var phantom_string = "https://www.privatesearch.io/?" + search_query;
   getBingResults(bing_string, data, function(){
-    getGoogleResults(goog_string, data, cb);
+    getPhantomResults(phantom_string, data, function(){
+      getGoogleResults(goog_string, data, cb);
+    });
   });
 
 
@@ -31,6 +35,39 @@ var getBingResults = function(search_query, data, cb){
     var $ = cheerio.load(body);
     //Bing's search link selector
     $('li.b_algo h2').each(function() {
+        var link = $(this);
+        var text = link.text();
+        // console.log("text: " , text);
+        var locat = link.find('a').attr('href');
+        d.push([text,locat]);
+    });
+
+    // console.log(d);
+
+    cb();
+
+
+    }
+  });
+
+
+
+
+}
+
+
+var getPhantomResults = function(search_query, data, cb){
+  var d = data.phantom;
+
+  request(search_query, function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+
+    console.log("Made it in");
+
+    console.log("Query is: ", search_query);
+    var $ = cheerio.load(body);
+    //DDG's search link selector
+    $('h4.result_header').each(function() {
         var link = $(this);
         var text = link.text();
         console.log("text: " , text);
@@ -50,6 +87,7 @@ var getBingResults = function(search_query, data, cb){
 
 
 }
+
 
 var getGoogleResults= function(search_query, data, cb){
 
