@@ -11,7 +11,7 @@ exports.getSearchResults = function(search_query, cb){
 
     console.log("Made it in");
     var $ = cheerio.load(body);
-
+    //Bing's search link selector
     $('li.b_algo h2').each(function() {
         var link = $(this);
         var text = link.text();

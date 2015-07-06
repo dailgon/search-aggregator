@@ -48,14 +48,6 @@ router.get('/search', function(req, res, next) {
       data: data});
   });
 
-
-  // model.getById(id, function(err, particle) {
-  //   if (err) return next(err);
-  //   res.render('particles', {
-  //     title: 'PARTICLES',
-  //     data: particle
-  //   });
-  // });
 });
 
 
