@@ -3,10 +3,7 @@ var request = require('request');
 var querystring = require('querystring')
 var util = require('util')
 
-var google = require('google')
-
 exports.getSearchResults = function(search_query, cb){
-  // var data = [];
 
   var data  = {
     google: [],
@@ -66,7 +63,8 @@ var getPhantomResults = function(search_query, data, cb){
 
     console.log("Query is: ", search_query);
     var $ = cheerio.load(body);
-    //DDG's search link selector
+    // Phantom search engine's class selector for titles
+    // and links
     $('h4.result_header').each(function() {
         var link = $(this);
         var text = link.text();
