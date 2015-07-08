@@ -34,13 +34,12 @@ var getBingResults = function(search_query, data, cb){
     $('li.b_algo h2').each(function() {
         var link = $(this);
         var text = link.text();
-        // console.log("text: " , text);
         var locat = link.find('a').attr('href');
         d.push([text,locat]);
     });
 
-    // console.log(d);
-
+    // Trigger the next search, can also use promises and something
+    // like Babel to compile code to vanilla JS
     cb();
 
 
@@ -89,39 +88,34 @@ var getPhantomResults = function(search_query, data, cb){
 
 var getGoogleResults= function(search_query, data, cb){
 
-var d = data.google;
-request(search_query, function (error, response, body) {
-if (!error && response.statusCode == 200) {
-  var $ = cheerio.load(body);
-  $('h3.r').each(function() {
-      var link = $(this);
-      // console.log(link.find('a').attr('href'));
-      var text = link.text();
-      // console.log(link.parent().html());
-      var item = {
-        link: null,
-        href: null
-      }
+  var d = data.google;
+  request(search_query, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var $ = cheerio.load(body);
+      $('h3.r').each(function() {
+        var link = $(this);
+        var text = link.text();
+        var item = {
+          link: null,
+          href: null
+        }
 
-      var qsObj = querystring.parse(link.find('a').attr('href'));
+        var qsObj = querystring.parse(link.find('a').attr('href'));
 
         if (qsObj['/url?q']) {
           item.link = qsObj['/url?q'];
           item.href = item.link;
         }
 
-      console.log(item.link);
+        console.log(item  .link);
 
 
 
-      var locat = link.html(); //find('a').html();
-      d.push([text, item.link]);
-  });
+        var locat = link.html();
+        d.push([text, item.link]);
+      });
 
-  console.log("BIG DATA: ");
-  console.log(data);
-
-  cb(null, data);
+      cb(null, data);
     }
   });
 
