@@ -20,6 +20,9 @@ router.get('/', function(req, res, next) {
     } });
 });
 
+
+// If we are at a search page, then gather the query from the
+// URL, and collect data from the results of Google, Bing, and PhantomJS
 router.get('/search', function(req, res, next) {
   var query_string = req.query.query
   var result = querystring.stringify({q: query_string});

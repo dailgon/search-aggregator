@@ -11,6 +11,11 @@ exports.getSearchResults = function(search_query, cb){
     phantom: []
   }
 
+
+  // Goes along and performs a chained series of functions
+  // resulting in a final callback to render the page with the
+  // full amount of data.
+  // We do it in this way because of the asynchronous nature of JS
   var bing_string = "http://www.bing.com/search?"+search_query;
   var goog_string = "https://www.google.com/search?"+search_query;
   var phantom_string = "https://www.privatesearch.io/?" + search_query;
@@ -23,6 +28,8 @@ exports.getSearchResults = function(search_query, cb){
 
 }
 
+
+//Get Results from scraping bing data at the given url.
 var getBingResults = function(search_query, data, cb){
   var d = data.bing;
   request(search_query, function (error, response, body) {
