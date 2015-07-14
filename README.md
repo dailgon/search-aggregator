@@ -13,10 +13,12 @@ Search Engines
 Setup
 -----
 
-```npm install<br>
-npm start```
+First install packages:
+`npm install`
+Then start:
+`npm start`
 
-Run
+View
 -----
 
 localhost:3000
