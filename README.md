@@ -13,8 +13,8 @@ Search Engines
 Setup
 -----
 
-`npm install`\n
-`npm start`
+```npm install
+npm start```
 
 Run
 -----
